@@ -12,3 +12,13 @@ happen for every file found within the directory and any sub directories. Furthe
 
 The UI follows the MVVM OOP pattern and is designed with extensibility in mind. Adding new file types to be converted is straightforward.
 
+To Add a New Model (or file conversion type):
+•	Create a new Python file in the "Model" folder and define a class.
+      -	In this class, you should implement the core functionality and processing required for the desired feature.
+•	Note: If your goal is to add a new type of conversion and not a completely new model, you can do so without creating a brand-new model. Follow these steps instead:
+      -	Create a new file within the "UI\Conversions" path.
+      -	In this new file, create a class that inherits from the existing Converter class located in "UI\Conversions\ABC."
+      -	Define a method named "Convert(self)" in your new class, which should contain the logic for generating a pixel array as a 2D numpy array.
+      -	Use the "WritePixelArray2Dicom" method from the Converter class to write the pixel array to a DICOM file.
+      -	In the Conversion Model file, add the file extension of the new conversion type to the "convertableFiles" class variable.
+      -	Also, add the file extension and a lambda function that instantiates the object as a key-value pair in the "converterObjDict" dictionary, respectively.
